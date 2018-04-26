@@ -10,9 +10,9 @@ import (
 	"sort"
 	"strings"
 
+	"./db"
+	"./fields"
 	"github.com/extemporalgenome/slug"
-	"github.com/oal/admin/db"
-	"github.com/oal/admin/fields"
 )
 
 // NamedModel requires an AdminName method to be present, to override the model's displayed name in the admin panel.

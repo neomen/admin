@@ -9,10 +9,10 @@ import (
 	"os"
 	"reflect"
 
+	"./db"
+	"./fields"
 	"github.com/extemporalgenome/slug"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/oal/admin/db"
-	"github.com/oal/admin/fields"
 )
 
 // NameTransformFunc is a function that takes the name of a Go struct field and outputs another version of itself.
@@ -51,8 +51,11 @@ func New(path, dbDriver, dbSource string) (*Admin, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	admin.sourceDir = fmt.Sprintf("%v/src/github.com/oal/admin", os.Getenv("GOPATH"))
+	dir, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	admin.sourceDir = fmt.Sprintf("%v/admin", dir)
 	admin.path = path
 	admin.Title = "Admin"
 
